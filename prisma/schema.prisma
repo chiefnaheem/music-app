@@ -23,15 +23,17 @@ model Song {
   id          String @id @default(cuid())
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  title String
+  title String?
   artist Artist @relation(fields: [artistId], references: [id])
   artistId String
   playlists Playlist[]
   album String?
   year Int?
   genre String?
-  duration Int?
+  duration Int
   lyrics String?
+  url String
+  name String?
 }
 
 model Artist {
@@ -40,14 +42,14 @@ model Artist {
   updatedAt   DateTime @updatedAt
   name String @unique
   // userId String
-  song Song[]
+  songs Song[]
 }
 
 model Playlist {
   id          String @id @default(cuid())
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  name String @unique
+  name String 
   songs Song[]
   user User @relation(fields: [userId], references: [id])
   userId String
