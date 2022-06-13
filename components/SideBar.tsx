@@ -10,7 +10,9 @@ import {
   LinkBox,
   LinkOverlay,
 } from "@chakra-ui/layout";
-import { MdHome, MdSearch, MdLibraryMusic, MdPlaylistAdd, MdFavourite } from "react-icons/md";
+import { MdHome, MdSearch, MdLibraryMusic, MdPlaylistAdd, MdFavorite } from "react-icons/md";
+
+const playlist = new Array(30).fill(1).map((_, i) => `Playlist${i+1}`)
 
 const navMenu = [
   {
@@ -29,6 +31,18 @@ const navMenu = [
     link: "/library",
   },
 ];
+const musicMenu = [
+  {
+    name: "Create Playlists",
+    icon: MdPlaylistAdd,
+    link: "/create-playlist",
+  },
+  {
+    name: "Favorites",
+    icon: MdFavorite,
+    link: "/favorite",
+  },
+];
 
 const SideBar = () => {
   return (
@@ -39,11 +53,11 @@ const SideBar = () => {
       paddingX="5px"
       color="gray"
     >
-      <Box paddingY="20px">
+      <Box paddingY="20px" height="100%">
         <Box width="120px" marginBottom="20px" paddingX="20px">
           <NextImage src="/preview.jpeg" width={120} height={60} />
         </Box>
-        <Box width="100%" marginBottom="20px">
+        <Box marginBottom="20px">
           <List spacing={2}>
             {navMenu.map((item, index) => (
               <ListItem key={index} paddingX="20px" fontSize="16px">
@@ -58,6 +72,40 @@ const SideBar = () => {
               </ListItem>
             ))}
           </List>
+        </Box>
+        <Divider color="gray.700" />
+        <Box marginTop="20px">
+          <List spacing={2}>
+            {musicMenu.map((item, index) => (
+              <ListItem key={index} paddingX="20px" fontSize="16px">
+                <LinkBox>
+                  <NextLink href={item.link} passHref>
+                    <LinkOverlay>
+                      <ListIcon as={item.icon} color="white" marginRight="20px" />
+                      {item.name}
+                    </LinkOverlay>
+                  </NextLink>
+                </LinkBox>
+              </ListItem>
+            ))}
+          </List>
+        </Box>
+        <Divider color="gray.700" />
+        <Box height="66%" overflowY="auto" paddingY="20px">
+            <List spacing={2}>
+            {playlist.map((item, index) => (
+                <ListItem key={index} paddingX="20px" fontSize="16px">
+                    <LinkBox>
+                        <NextLink href='/' passHref>
+                            <LinkOverlay>
+                                {/* <ListIcon as={MdPlaylistAdd} color="white" marginRight="20px" /> */}
+                                {item}
+                            </LinkOverlay>
+                        </NextLink>
+                    </LinkBox>
+                </ListItem>
+            ))}
+            </List>
         </Box>
       </Box>
     </Box>

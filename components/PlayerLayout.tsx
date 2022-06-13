@@ -11,7 +11,7 @@ const PlayerLayout = ({children}) => {
       <Box marginLeft="250px" marginBottom="100px">
         {children}
       </Box>
-      <Box position="absolute" bottom="0" left="0" width="250px">
+      <Box position="absolute" bottom="0" left="0">
         Player
       </Box>
     </Box>
