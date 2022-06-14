@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import prisma from './prisma';
 import {NextApiRequest, NextApiResponse} from 'next';
+
 export const validateRoute = (handler) => {
     return async (req: NextApiRequest, res: NextApiResponse) => {
         // const {process.env.TOKEN_NAME: token} = req.cookies;
@@ -18,9 +19,10 @@ export const validateRoute = (handler) => {
                     throw new Error('Not Real User')
                 }
             }catch(e){
-                res.status(401).json({error: "Unauthorized"})
+               return res.status(401).json({error: "Unauthorized"})
             }
+            return handler(req, res, user);
         }
-
+        return res.status(401).json({ error: "Unauthorized" });
     }
 }
